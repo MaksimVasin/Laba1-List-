@@ -41,18 +41,6 @@ public:
 			Assert::AreEqual("Index is greater than list size", error.what());
 		}
 	}
-	TEST_METHOD(at_zero_index)
-	{
-		TList->push_back(1);
-		try
-		{
-			TList->at(0);
-		}
-		catch (std::out_of_range error)
-		{
-			Assert::AreEqual("There is no zero index", error.what());
-		}
-	}
 	TEST_METHOD(at_emty_list)
 	{
 		TList->clear();

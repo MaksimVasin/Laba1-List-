@@ -23,12 +23,11 @@ LinkedList::~LinkedList()
 int LinkedList::at(size_t pos)
 {
 	if (isEmpty()) throw std::out_of_range("The list is empty");
-	if (pos > sizeList) throw std::out_of_range("Index is greater than list size");
-	else if (pos == 0) throw std::out_of_range("There is no zero index");
+	if (pos + 1> sizeList) throw std::out_of_range("Index is greater than list size");
 	else
 	{
-		current = head;
-		for (size_t position = 1; position < pos; position++) // go to the desired list position
+		Node* current = head;
+		for (size_t position = 0; position < pos; position++) // go to the desired list position
 		{
 			current = current->next;
 		}
@@ -56,18 +55,17 @@ size_t LinkedList::get_size()
 void LinkedList::insert(int data, size_t pos)
 {
 	if (sizeList == 0) throw std::out_of_range("The list is empty");
-	if (pos > sizeList) throw std::out_of_range("Index is greater than list size");
-	else if (pos == 0) throw std::out_of_range("There is no zero index");
+	if (pos + 1> sizeList) throw std::out_of_range("Index is greater than list size");
 	else
 	{
-		current = head;
-		if (pos == 1)
+		Node* current = head;
+		if (pos == 0)
 		{
 			push_front(data);
 		}
 		else
 		{
-			for (size_t position = 1; position < pos; position++)
+			for (size_t position = 0; position < pos; position++)
 			{
 				current = current->next;
 			}
@@ -93,13 +91,12 @@ void LinkedList::pop_back()
 	if (sizeList == 0) throw std::out_of_range("The list is empty");
 	else if (sizeList == 1)
 	{
-		current = tail;
-		delete current;
+		delete tail;
 		sizeList--;
 	}
 	else // if SizeList != 0,1
 	{
-		current = tail;
+		Node* current = tail;
 		current->prev->next = NULL;
 		tail = current->prev;
 		delete current;
@@ -112,13 +109,12 @@ void LinkedList::pop_front()
 	if (isEmpty()) throw std::out_of_range("The list is empty");
 	else if (sizeList == 1)
 	{
-		current = head;
-		delete current;
+		delete head;
 		sizeList--;
 	}
 	else // if SizeList != 0,1
 	{
-		current = head;
+		Node* current = head;
 		head = current->next;
 		current->next->prev = NULL;
 		delete current;
@@ -134,9 +130,9 @@ void LinkedList::print_to_console()
 	}
 	else
 	{
-		current = head;
+		Node* current = head;
 		std::cout << " | ";
-		for (size_t position = 1; position <= sizeList; position++)
+		for (size_t position = 0; position < sizeList; position++)
 		{
 			std::cout << current->data << " | ";
 			current = current->next;
@@ -184,22 +180,21 @@ void LinkedList::push_front(int data)
 void LinkedList::remove(size_t pos)
 {
 	if (sizeList == 0) throw std::out_of_range("The list is empty");
-	if (pos > sizeList) throw std::out_of_range("Index is greater than list size");
-	else if (pos == 0) throw std::out_of_range("There is no zero index");
+	if (pos + 1 > sizeList) throw std::out_of_range("Index is greater than list size");
 	else
 	{
-		if (pos == 1) // if this is the first element
+		if (pos == 0) // if this is the first element
 		{
 			pop_front();
 		}
-		else if (pos == sizeList) // if this is the last element
+		else if (pos == sizeList - 1) // if this is the last element
 		{
 			pop_back();
 		}
 		else
 		{
-			current = head;
-			for (size_t position = 1; position < pos; position++) // go to the desired list position
+			Node* current = head;
+			for (size_t position = 0; position < pos; position++) // go to the desired list position
 			{
 				current = current->next;
 			}
@@ -215,12 +210,12 @@ void LinkedList::reverse()
 {
 	int buffer; // auxiliary variable to swap
 	Node* current2 = tail;
-	current = head;
+	Node* current = head;
 	if (sizeList == 0) throw std::out_of_range("The list is empty");
 	else if (sizeList == 1);
 	else
 	{
-		for (size_t position = 1; position <= sizeList / 2; position++)
+		for (size_t position = 0; position < sizeList / 2; position++)
 		{
 			if (current->data != current2->data)
 			{
@@ -237,12 +232,11 @@ void LinkedList::reverse()
 void LinkedList::set(int data, size_t pos) // replacing an element by index with the passed element
 {
 	if (sizeList == 0) throw std::out_of_range("The list is empty");
-	if (pos > sizeList) throw std::out_of_range("Index is greater than list size");
-	else if (pos == 0) throw std::out_of_range("There is no zero index");
+	if (pos + 1 > sizeList) throw std::out_of_range("Index is greater than list size");
 	else
 	{
-		current = head;
-		for (size_t position = 1; position < pos; position++) // go to the desired list position
+		Node* current = head;
+		for (size_t position = 0; position < pos; position++) // go to the desired list position
 		{
 			current = current->next;
 		}

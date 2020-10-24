@@ -39,5 +39,4 @@ private:
 	size_t sizeList;
 	Node* head;
 	Node* tail;
-	Node* current;
 };
